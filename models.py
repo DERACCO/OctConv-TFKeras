@@ -28,11 +28,11 @@ def _create_octconv_residual_block(inputs, ch, N, alpha):
     for i in range(N):
         # adjust channels
         if i == 0:
-            skip_high = layers.Conv2D(int(ch*(1-alpha)), 1)(high)
+            skip_high = layers.Conv2D(int(ch*(1-alpha)+0.5), 1)(high)
             skip_high = layers.BatchNormalization()(skip_high)
             skip_high = layers.Activation("relu")(skip_high)
 
-            skip_low = layers.Conv2D(int(ch*alpha), 1)(low)
+            skip_low = layers.Conv2D(int(ch*alpha+0.5), 1)(low)
             skip_low = layers.BatchNormalization()(skip_low)
             skip_low = layers.Activation("relu")(skip_low)
         else:
